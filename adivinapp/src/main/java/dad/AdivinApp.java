@@ -19,6 +19,7 @@ public class AdivinApp extends Application {
   private Button botonAceptar;
   private Alert aciertoAlert = new Alert(AlertType.INFORMATION);
   private double numeroRan = (int) (Math.random() * 100);
+  private int intentos = 0;
 
 
   @Override
@@ -48,26 +49,26 @@ public class AdivinApp extends Application {
   private void showWinOrLose(ActionEvent e) {
 
     double num = Integer.parseInt(numeroText.getText());
-    int intentos = 0;
 
     if (num <= 100 && num >= 0) {
 
 
       if (num > numeroRan) {
+        ++intentos;
         aciertoAlert.setAlertType(AlertType.WARNING);
         aciertoAlert.setTitle("AdivinApp");
         aciertoAlert.setHeaderText("Has Fallado");
         aciertoAlert.setContentText("El numero es menor que " + num);
 
       } else if (num == numeroRan) {
-
+        ++intentos;
         aciertoAlert.setAlertType(AlertType.CONFIRMATION);
         aciertoAlert.setTitle("AdivinApp");
         aciertoAlert.setHeaderText("Has Acertado");
         aciertoAlert.setContentText("Lo has intentando " + intentos + " vez/veces");
 
       } else {
-
+        ++intentos;
         aciertoAlert.setAlertType(AlertType.WARNING);
         aciertoAlert.setTitle("AdivinApp");
         aciertoAlert.setHeaderText("Has Fallado");
@@ -81,7 +82,6 @@ public class AdivinApp extends Application {
       aciertoAlert.setHeaderText("Error");
       aciertoAlert.setContentText("El numero introducido no esta dentro de los parametros");
     }
-    intentos++;
 
     aciertoAlert.showAndWait();
   }
